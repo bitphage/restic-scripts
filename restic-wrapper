@@ -1,0 +1,23 @@
+#!/bin/sh -e
+
+# init remote repo
+# restic -r sftp:user@host:/path init
+
+# backup host definitions
+HOST=backup.tgt72.ru
+TARGET=/mnt/backups/backup-duplicity/vvk-restic
+USER=backup-duplicity
+
+export RESTIC_REPOSITORY=sftp:$USER@$HOST:$TARGET
+export RESTIC_PASSWORD=
+
+exclude_args="--exclude=.cache --exclude=.gqview/thumbnails --exclude=*.vdi --exclude=.duplicity"
+
+#echo $RESTIC_REPOSITORY
+#restic -r sftp:backup-duplicity@backup.tgt72.ru:/mnt/backups/backup-duplicity/vvk-restic snapshots
+#restic init
+
+ionice -c3 -p$$
+
+restic backup $exclude_args /home/vvk /etc /usr/local /var/spool/cron /srv
+restic forget --prune --keep-daily 14 --keep-weekly 4 --keep-monthly 6 --keep-yearly 2
