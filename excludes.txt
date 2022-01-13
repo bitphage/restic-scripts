@@ -1,0 +1,5 @@
+# See https://restic.readthedocs.io/en/stable/040_backup.html#excluding-files
+.cache
+.gqview/thumbnails
+*.vdi
+/home/vvk/tmp

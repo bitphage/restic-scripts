@@ -1,0 +1,5 @@
+/home/vvk
+/etc
+/usr/local
+/var/spool/cron
+/srv

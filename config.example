@@ -1,0 +1,29 @@
+# if enabled, prefer HOST_LOCAL, otherwise HOST_REMOTE
+# Use-case is backup your notebook via fast ethernet connection at home, or via VPN when far away
+ENABLE_HOST_AUTOSELECT=0
+
+HOST_LOCAL=192.168.1.2
+HOST_REMOTE=home-vpn
+
+# Target repostory type: local, sftp
+# local - backup to the local directory on the same PC
+# sftp - backup to the remote location via sftp
+REPO_TYPE=local
+
+# username to access remote hosts (sftp)
+USER=vvk
+
+# Repository password
+RESTIC_PASSWORD=xxx
+
+# Path on the remote sftp server or local directory
+TARGET=/mnt/space/backups/note
+
+# --keep-daily
+KEEP_DAILY=14
+# --keep-weekly
+KEEP_WEEKLY=4
+# --keep-monthly
+KEEP_MONTHLY=6
+# --keep-yearly
+KEEP_YEARLY=2

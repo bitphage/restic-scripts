@@ -1,23 +1,33 @@
 #!/bin/sh -e
 
-# init remote repo
-# restic -r sftp:user@host:/path init
+script_dir="${0%/*}"
 
-# backup host definitions
-HOST=backup.tgt72.ru
-TARGET=/mnt/backups/backup-duplicity/vvk-restic
-USER=backup-duplicity
+config="$script_dir/config"
+[ -s "$config" ] && . "$config" || exit 1
 
-export RESTIC_REPOSITORY=sftp:$USER@$HOST:$TARGET
-export RESTIC_PASSWORD=
 
-exclude_args="--exclude=.cache --exclude=.gqview/thumbnails --exclude=*.vdi --exclude=.duplicity"
+if [ x"$ENABLE_HOST_AUTOSELECT" = x"1" ]; then
+    ping -c1 -W1 $HOST_LOCAL && HOST=$HOST_LOCAL || HOST=$HOST_REMOTE
+fi
 
-#echo $RESTIC_REPOSITORY
-#restic -r sftp:backup-duplicity@backup.tgt72.ru:/mnt/backups/backup-duplicity/vvk-restic snapshots
-#restic init
+if [ x"$REPO_TYPE" = x"sftp" ]; then
+    REPO=sftp:$USER@$HOST:$TARGET
+elif [ x"$REPO_TYPE" = x"local" ]; then
+    REPO=$TARGET
+fi
+
+export RESTIC_REPOSITORY=$REPO
+export RESTIC_PASSWORD=$RESTIC_PASSWORD
+
+
+# init remote repo if not exists
+if ! restic snapshots >/dev/null; then
+    echo "Repo does no exists, initializing"
+    restic init
+fi
 
 ionice -c3 -p$$
 
-restic backup $exclude_args /home/vvk /etc /usr/local /var/spool/cron /srv
-restic forget --prune --keep-daily 14 --keep-weekly 4 --keep-monthly 6 --keep-yearly 2
+restic backup --exclude-file="$script_dir/excludes.txt" --files-from="$script_dir/includes.txt"
+restic unlock
+restic forget --prune --keep-daily $KEEP_DAILY --keep-weekly $KEEP_WEEKLY --keep-monthly $KEEP_MONTHLY --keep-yearly $KEEP_YEARLY
