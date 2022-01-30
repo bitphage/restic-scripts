@@ -11,6 +11,8 @@ Supports:
 
 ```
 cp config.example config
-vim config
+cp excludes.txt.example excludes.txt
+cp includes.txt.example includes.txt
+$EDITOR config excludes.txt includes.txt
 ./restic-wrapper
 ```
