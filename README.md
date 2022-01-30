@@ -17,6 +17,14 @@ $EDITOR config excludes.txt includes.txt
 ./restic-wrapper
 ```
 
+### Running from cron
+
+Example root crontab entry:
+
+```
+30 3 * * * /path/to/restic-scripts/restic-wrapper
+```
+
 ## Restore
 
 ### Local directory
