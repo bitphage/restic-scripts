@@ -16,3 +16,13 @@ cp includes.txt.example includes.txt
 $EDITOR config excludes.txt includes.txt
 ./restic-wrapper
 ```
+
+## Restore
+
+### Local directory
+
+To restore from local backups, the easiest way is to mount backups
+
+```
+restic mount -r /path/to/backup/repo ./restore
+```
