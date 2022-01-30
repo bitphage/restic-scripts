@@ -2,5 +2,5 @@
 .cache
 .gqview/thumbnails
 *.vdi
-/home/vvk/tmp
+/home/user/tmp
 .var/app/org.chromium.Chromium/cache

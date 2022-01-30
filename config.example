@@ -17,7 +17,7 @@ USER=vvk
 RESTIC_PASSWORD=xxx
 
 # Path on the remote sftp server or local directory
-TARGET=/mnt/space/backups/note
+TARGET=/mnt/backups/note
 
 # --keep-daily
 KEEP_DAILY=14
