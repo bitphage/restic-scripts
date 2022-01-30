@@ -3,3 +3,4 @@
 .gqview/thumbnails
 *.vdi
 /home/vvk/tmp
+.var/app/org.chromium.Chromium/cache
