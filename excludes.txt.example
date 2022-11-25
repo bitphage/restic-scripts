@@ -4,3 +4,4 @@
 *.vdi
 /home/user/tmp
 .var/app/org.chromium.Chromium/cache
+snap/chromium/common/chromium/Default/Cache/Cache_Data
