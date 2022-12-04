@@ -5,3 +5,7 @@
 /home/user/tmp
 .var/app/org.chromium.Chromium/cache
 snap/chromium/common/chromium/Default/Cache/Cache_Data
+"snap/chromium/common/chromium/Default/Service Worker"
+"snap/chromium/common/chromium/Default/Code Cache"
+TelegramDesktop/tdata/user_data/media_cache
+TelegramDesktop/tdata/user_data/cache
